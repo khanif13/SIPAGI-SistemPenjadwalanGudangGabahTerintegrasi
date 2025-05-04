@@ -64,7 +64,6 @@
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
 | nama_gudang | VARCHAR(100) | Nama Gudang |
-| password | VARCHAR(255) | Password |
 | kapasitas | INT | Maksimal kapasitas gudang |
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
