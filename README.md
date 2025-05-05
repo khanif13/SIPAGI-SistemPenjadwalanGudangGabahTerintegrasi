@@ -114,3 +114,4 @@
 | ```penjadwalans.user_id``` | ```users.id``` | Many to One | Setiap jadwal diajukan oleh satu user |
 | ```penjadwalans.gudang_id``` | ```gudangs.id``` | Many to One | Setiap jadwal diajukan ke satu gudang |
 | ```stok_gabahs.gudang_id``` | ```gudangs.id``` | Many to One | Banyak stok masuk ke satu gudang |
+| ```gudang_users``` | ```users.id<>gudangs.id``` | Many to Many | Satu user bisa kelola banyak gudang, dan satu gudang bisa dikelola banyak user |
