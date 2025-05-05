@@ -101,7 +101,7 @@
 ## Jenis relasi dan tabel yang berelasi
 | Tabel Asal | Tabel Tujuan | Jenis Relasi | Keterangan |
 | ----------- | ----------- | ----------- | ----------- |
-| ```users.role_id``` | ```roles.id``` | Many to One | Banyak user bisa punya satu role |
+| ```profiles.user_id``` | ```users.id``` | One to One | Satu user bisa punya satu profile |
 | ```penjadwalans.user_id``` | ```users.id``` | Many to One | Setiap jadwal diajukan oleh satu user |
 | ```penjadwalans.gudang_id``` | ```gudangs.id``` | Many to One | Setiap jadwal diajukan ke satu gudang |
 | ```stok_gabahs.gudang_id``` | ```gudangs.id``` | Many to One | Banyak stok masuk ke satu gudang |
