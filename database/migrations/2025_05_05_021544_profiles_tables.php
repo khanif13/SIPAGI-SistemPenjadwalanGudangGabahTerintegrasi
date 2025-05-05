@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->string('nama_lengkap');
+            $table->string('alamat');
+            $table->string('no_telepon');
             $table->enum('role', ['admin', 'manager_gudang', 'petani']);
-            $table->string('password');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

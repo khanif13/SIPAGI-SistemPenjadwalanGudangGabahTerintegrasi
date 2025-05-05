@@ -41,25 +41,18 @@
 ---
 ## Tabel-tabel database beserta field dan tipe datanya
 
-### 1. Tabel ```{users}```
+### 1. Tabel ```users```
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
 | nama | VARCHAR(100) | Nama User |
-| role_id | INT(FK) | Relasi ke ```{roles.id}``` |
+| role | ENUM | Nama Role: admin, manager gudang, petani |
 | email | VARCHAR(100) | Email Unik |
 | password | VARCHAR(255) | Password |
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
-### 2. Tabel ```{roles}```
-| Field | Tipe Data | Keterangan |
-| ----------- | ----------- | ----------- |
-| id | INT(PK) | Primary Key |
-| nama | VARCHAR(100) | Nama Role: admin, manager gudang, petani |
-| created_at | TIMESTAMP | Waktu dibuat |
-
-### 3. Tabel ```{gudang}```
+### 2. Tabel ```gudang```
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
@@ -68,12 +61,12 @@
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
-### 4. Tabel ```{penjadwalans}```
+### 3. Tabel ```penjadwalans```
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
-| user_id | INT(FK) | Relasi ke ```{users.id}``` |
-| gudang_id | INT(FK) | Relasi ke ```{gudangs.id}``` |
+| user_id | INT(FK) | Relasi ke ```users.id``` |
+| gudang_id | INT(FK) | Relasi ke ```gudangs.id``` |
 | tanggal_kirim | DATE | Tanggal kirim gabah |
 | berat_gabah | FLOAT | Berat gabah dalam kg |
 | kadar_air | FLOAT | Persentase kadar air padi |
@@ -81,11 +74,11 @@
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
-### 5. Tabel ```{stok_gabahs}```
+### 4. Tabel ```stok_gabahs```
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
-| gudang_id | INT(FK) | Relasi ke ```{gudangs.id}``` |
+| gudang_id | INT(FK) | Relasi ke ```gudangs.id``` |
 | tanggal_masuk | DATE | Tanggal kirim gabah |
 | berat_gabah | FLOAT | Berat gabah dalam kg |
 | kadar_air | FLOAT | Persentase kadar air padi |

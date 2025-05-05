@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('stok_gabahs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->enum('role', ['admin', 'manager_gudang', 'petani']);
-            $table->string('password');
+            $table->unsignedBigInteger('gudang_id');
+            $table->date('tanggal_masuk');
+            $table->float('berat_gabah');
+            $table->float('kadar_air');
+            $table->string('sumber');
             $table->timestamps();
+
+            $table->foreign('gudang_id')->references('id')->on('gudangs')->onDelete('cascade');
         });
     }
 
