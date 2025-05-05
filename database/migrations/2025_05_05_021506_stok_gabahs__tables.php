@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stok_gabahs', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('gudang_id');
+            $table->int('id')->autoIncrement();
+            $table->int('gudang_id');
             $table->date('tanggal_masuk');
             $table->float('berat_gabah');
             $table->float('kadar_air');

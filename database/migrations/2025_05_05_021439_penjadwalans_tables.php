@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penjadwalans', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('gudang_id');
+            $table->int('id')->autoIncrement();
+            $table->int('user_id');
+            $table->int('gudang_id');
             $table->date('tanggal_kirim');
             $table->float('berat_gabah');
             $table->float('kadar_air');

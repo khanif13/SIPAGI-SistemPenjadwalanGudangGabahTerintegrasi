@@ -86,6 +86,17 @@
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
+### 5. Tabel ```profiles```
+| Field | Tipe Data | Keterangan |
+| ----------- | ----------- | ----------- |
+| id | INT(PK) | Primary Key |
+| user_id | INT(FK) | ID User |
+| role | ENUM | Nama Role: admin, manager gudang, petani |
+| email | VARCHAR(100) | Email Unik |
+| password | VARCHAR(255) | Password |
+| created_at | TIMESTAMP | Waktu dibuat |
+| updated_at | TIMESTAMP | Waktu diupdate |
+
 ---
 ## Jenis relasi dan tabel yang berelasi
 | Tabel Asal | Tabel Tujuan | Jenis Relasi | Keterangan |
