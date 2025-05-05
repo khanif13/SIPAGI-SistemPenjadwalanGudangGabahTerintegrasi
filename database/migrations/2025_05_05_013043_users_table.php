@@ -15,14 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->enum('role', ['admin', 'manager_gudang', 'petani'])->unique();
             $table->string('password');
-            $table->timestamps();
-        });
-
-        Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->enum('nama', ['admin', 'manager_gudang', 'petani'])->unique();
             $table->timestamps();
         });
 
