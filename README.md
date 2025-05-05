@@ -52,7 +52,7 @@
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
-### 2. Tabel ```gudang```
+### 2. Tabel ```gudangs```
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
@@ -94,7 +94,15 @@
 | nama_lengkap | VARCHAR(100) | Nama User |
 | alamat | VARCHAR(100) | Alamat User |
 | no_telepon | VARCHAR(100) | Alamat User |
-| role | ENUM | Nama Role: admin, manager gudang, petani |
+| created_at | TIMESTAMP | Waktu dibuat |
+| updated_at | TIMESTAMP | Waktu diupdate |
+
+### 6. Tabel ```gudang_users```
+| Field | Tipe Data | Keterangan |
+| ----------- | ----------- | ----------- |
+| id | INT(PK) | Primary Key |
+| user_id | INT(FK) | ID User |
+| gudang_id | INT(FK) | ID Gudang |
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 

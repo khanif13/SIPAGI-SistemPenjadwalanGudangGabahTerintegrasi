@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stok_gabahs', function (Blueprint $table) {
-            $table->int('id')->autoIncrement();
-            $table->int('gudang_id');
-            $table->date('tanggal_masuk');
-            $table->float('berat_gabah');
-            $table->float('kadar_air');
-            $table->int('user_id');
+        Schema::create('gudang_user', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('gudang_id');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('gudang_id')->references('id')->on('gudangs')->onDelete('cascade');
         });
     }

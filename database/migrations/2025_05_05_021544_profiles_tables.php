@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->string('alamat');
             $table->string('no_telepon');
-            $table->enum('role', ['admin', 'manager_gudang', 'petani']);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
