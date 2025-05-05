@@ -29,23 +29,28 @@ return new class extends Migration
 
         Schema::create('penjadwalans', function (Blueprint $table) {
             $table->id();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('gudang_id')->references('id')->on('gudangs')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('gudang_id');
             $table->date('tanggal_kirim');
             $table->float('berat_gabah');
             $table->float('kadar_air');
             $table->enum('status', ['diajukan', 'diproses', 'selesai', 'ditolak']);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('gudang_id')->references('id')->on('gudangs')->onDelete('cascade');
         });
 
         Schema::create('stok_gabahs', function (Blueprint $table) {
             $table->id();
-            $table->foreign('gudang_id')->references('id')->on('gudangs')->onDelete('cascade');
+            $table->unsignedBigInteger('gudang_id');
             $table->date('tanggal_masuk');
             $table->float('berat_gabah');
             $table->float('kadar_air');
             $table->string('sumber');
             $table->timestamps();
+
+            $table->foreign('gudang_id')->references('id')->on('gudangs')->onDelete('cascade');
         });
     }
 
