@@ -91,9 +91,10 @@
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
 | user_id | INT(FK) | ID User |
+| nama_lengkap | VARCHAR(100) | Nama User |
+| alamat | VARCHAR(100) | Alamat User |
+| no_telepon | VARCHAR(100) | Alamat User |
 | role | ENUM | Nama Role: admin, manager gudang, petani |
-| email | VARCHAR(100) | Email Unik |
-| password | VARCHAR(255) | Password |
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
