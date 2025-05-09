@@ -46,15 +46,6 @@
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
 | nama | VARCHAR(100) | Nama User |
-<<<<<<< HEAD
-| role | ENUM | Nama Role: admin, manager gudang, petani |
-| email | VARCHAR(100) | Email Unik |
-| password | VARCHAR(255) | Password |
-| created_at | TIMESTAMP | Waktu dibuat |
-| updated_at | TIMESTAMP | Waktu diupdate |
-
-### 2. Tabel ```gudangs```
-=======
 | email | VARCHAR(100) | Email Unik |
 | password | VARCHAR(255) | Password |
 | role_id | INT(FK) | Relasi ke ```roles.id`` |
@@ -69,7 +60,6 @@
 
 
 ### 3. Tabel ```gudangs```
->>>>>>> side
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
@@ -78,11 +68,7 @@
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
-<<<<<<< HEAD
-### 3. Tabel ```penjadwalans```
-=======
 ### 4. Tabel ```penjadwalans```
->>>>>>> side
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
@@ -95,11 +81,7 @@
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
-<<<<<<< HEAD
-### 4. Tabel ```stok_gabahs```
-=======
 ### 5. Tabel ```stok_gabahs```
->>>>>>> side
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
@@ -111,11 +93,7 @@
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
-<<<<<<< HEAD
-### 5. Tabel ```profiles```
-=======
 ### 6. Tabel ```profiles```
->>>>>>> side
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
@@ -126,11 +104,7 @@
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
-<<<<<<< HEAD
-### 6. Tabel ```gudang_users```
-=======
 ### 7. Tabel ```gudang_users```
->>>>>>> side
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
@@ -147,9 +121,4 @@
 | ```penjadwalans.user_id``` | ```users.id``` | Many to One | Setiap jadwal diajukan oleh satu user |
 | ```penjadwalans.gudang_id``` | ```gudangs.id``` | Many to One | Setiap jadwal diajukan ke satu gudang |
 | ```stok_gabahs.gudang_id``` | ```gudangs.id``` | Many to One | Banyak stok masuk ke satu gudang |
-<<<<<<< HEAD
-| ```gudang_users``` | ```users.id<>gudangs.id``` | Many to Many | Satu user bisa kelola banyak gudang, dan satu gudang bisa dikelola banyak user |
-=======
-
 | ```gudang_users``` | ```users.id<>gudangs.id``` | Many to Many | Satu user bisa kelola banyak gudang, dan satu gudang bisa dikelola banyak user+- |
->>>>>>> side
