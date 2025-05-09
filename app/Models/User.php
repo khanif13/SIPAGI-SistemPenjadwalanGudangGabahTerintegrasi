@@ -19,6 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+<<<<<<< HEAD
+=======
+        'username',
+>>>>>>> side
         'email',
         'password',
     ];
@@ -45,4 +49,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+<<<<<<< HEAD
+=======
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+    public function gudangs()
+    {
+        return $this->belongsToMany(Gudang::class, 'gudang_user')
+            ->withPivot('role_id')
+            ->withTimestamps();
+    }
+>>>>>>> side
 }

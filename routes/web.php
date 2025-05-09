@@ -1,7 +1,36 @@
 <?php
 
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\GudangController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\ProfileController;
+>>>>>>> side
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+<<<<<<< HEAD
+=======
+
+Route::resource('jadwal', JadwalController::class);
+Route::put('/jadwal/{id}/terima', [JadwalController::class, 'terima'])->name('jadwal.terima');
+Route::put('/jadwal/{id}/tolak', [JadwalController::class, 'tolak'])->name('jadwal.tolak');
+
+Route::resource('gudang', GudangController::class)->middleware(['auth', 'can:create-gudang', 'can:update-gudang', 'can:delete-gudang']);
+
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
+>>>>>>> side
