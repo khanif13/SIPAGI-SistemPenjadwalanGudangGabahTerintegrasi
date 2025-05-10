@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <title>Dashboard - SIPAGI</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -46,7 +46,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="/dashboard" class="logo d-flex align-items-center">
                 <img src="{{ asset('niceadmin') }}/assets/img/logo.png" alt="">
                 <span class="d-none d-lg-block">SIPAGI</span>
             </a>
@@ -68,7 +68,7 @@
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6>{{ Auth::user()->name }}</h6>
-                            <span>Web Designer</span>
+                            <span>{{ Auth::user()->role->name }}</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -156,6 +156,15 @@
                 </li><!-- End Gudang Nav -->
             @endif
 
+            @if (Gate::allows('create-stok') || Gate::allows('delete-stok') || Gate::allows('update-stok'))
+                <li>
+                    <a class="nav-link {{ request()->is('stok-gabah*') ? '' : 'collapsed' }}" href="/stok-gabah">
+                        <i class="ri-stack-line"></i>
+                        <span>Stok</span>
+                    </a>
+                </li><!-- End Gudang Nav -->
+            @endif
+
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('faq*') ? '' : 'collapsed' }}" href="pages-faq.html">
                     <i class="bi bi-question-circle"></i>
@@ -168,6 +177,7 @@
     </aside><!-- End Sidebar-->
 
     @yield('content')
+
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">

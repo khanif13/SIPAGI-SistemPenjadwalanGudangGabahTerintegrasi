@@ -9,7 +9,7 @@ class Gudang extends Model
     protected $fillable = ['nama_gudang', 'kapasitas'];
 
 
-    public function penjadwalans()
+    public function jadwals()
     {
         return $this->hasMany(Jadwal::class);
     }

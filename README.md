@@ -86,10 +86,10 @@
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
 | gudang_id | INT(FK) | Relasi ke ```gudangs.id``` |
+| user_id | INT(FK) | Nama petani atau sumber gabah |
 | tanggal_masuk | DATE | Tanggal kirim gabah |
 | berat_gabah | FLOAT | Berat gabah dalam kg |
 | kadar_air | FLOAT | Persentase kadar air padi |
-| sumber | VARCHAR(100) | Nama petani atau sumber gabah |
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 

@@ -11,8 +11,9 @@ class StokGabah extends Model
         'user_id',
         'tanggal_masuk',
         'berat_gabah',
-        'kadar_air'
+        'kadar_air',
     ];
+
 
     public function gudang()
     {

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <main id="main" class="main">
-
         <div class="pagetitle">
             <h1>Data Tables</h1>
             <nav>
@@ -10,12 +9,11 @@
                     <li class="breadcrumb-item active">Jadwal</li>
                 </ol>
             </nav>
-        </div><!-- End Page Title -->
+        </div>
 
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -23,7 +21,6 @@
                                 <a href="{{ route('jadwal.create') }}" class="btn btn-primary mt-3">Tambah Jadwal</a>
                             </div>
 
-                            <!-- Table with stripped rows -->
                             <table class="table datatable">
                                 <thead>
                                     <tr>
@@ -52,20 +49,33 @@
                                             @if (Auth::user()->role_id == '1')
                                                 <td class="text-end">
                                                     @if ($p->status == 'diajukan')
-                                                        <form action="{{ route('jadwal.terima', $p->id) }}" method="POST"
-                                                            style="display:inline;">
+                                                        <form action="{{ route('jadwal.updateStatus', $p->id) }}"
+                                                            method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('PUT')
+                                                            <input type="hidden" name="status" value="diterima">
                                                             <button type="submit"
                                                                 class="btn btn-success btn-sm">Terima</button>
                                                         </form>
 
-                                                        <form action="{{ route('jadwal.tolak', $p->id) }}" method="POST"
-                                                            style="display:inline;">
+                                                        <form action="{{ route('jadwal.updateStatus', $p->id) }}"
+                                                            method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('PUT')
+                                                            <input type="hidden" name="status" value="tolak">
                                                             <button type="submit"
                                                                 class="btn btn-warning btn-sm">Tolak</button>
+                                                        </form>
+                                                    @endif
+
+                                                    @if ($p->status == 'diterima')
+                                                        <form action="{{ route('jadwal.updateStatus', $p->id) }}"
+                                                            method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input type="hidden" name="status" value="selesai">
+                                                            <button type="submit"
+                                                                class="btn btn-primary btn-sm">Selesai</button>
                                                         </form>
                                                     @endif
 
@@ -82,12 +92,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <!-- End Table with stripped rows -->
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-    </main><!-- End #main -->
+    </main>
 @endsection

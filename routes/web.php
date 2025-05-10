@@ -1,31 +1,35 @@
 <?php
 
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\ProfileController;
->>>>>>> side
+use App\Http\Controllers\StokGabahController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-<<<<<<< HEAD
-=======
 
+// CRUD utama
 Route::resource('jadwal', JadwalController::class);
-Route::put('/jadwal/{id}/terima', [JadwalController::class, 'terima'])->name('jadwal.terima');
-Route::put('/jadwal/{id}/tolak', [JadwalController::class, 'tolak'])->name('jadwal.tolak');
+Route::resource('stok-gabah', StokGabahController::class);
 
-Route::resource('gudang', GudangController::class)->middleware(['auth', 'can:create-gudang', 'can:update-gudang', 'can:delete-gudang']);
+// Update status jadwal (terima, tolak, selesai)
+Route::put('/jadwal/{id}/status', [JadwalController::class, 'updateStatus'])->name('jadwal.updateStatus');
 
+// CRUD Gudang dan Stok Gabah dengan middleware
+Route::resource('gudang', GudangController::class)
+    ->middleware(['auth', 'can:create-gudang', 'can:update-gudang', 'can:delete-gudang']);
 
+Route::resource('stok-gabah', StokGabahController::class)
+    ->middleware(['auth', 'can:create-stok', 'can:update-stok', 'can:delete-stok']);
 
+// Dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Profile
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -33,4 +37,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
->>>>>>> side

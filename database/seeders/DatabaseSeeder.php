@@ -15,11 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-<<<<<<< HEAD
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-=======
         // User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
@@ -29,7 +24,6 @@ class DatabaseSeeder extends Seeder
             GudangsSeeder::class,
             RolesSeeder::class,
             UsersSeeder::class,
->>>>>>> side
         ]);
     }
 }

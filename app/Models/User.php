@@ -19,12 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-<<<<<<< HEAD
-=======
         'username',
->>>>>>> side
         'email',
         'password',
+        'role_id'
     ];
 
     /**
@@ -49,18 +47,26 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-<<<<<<< HEAD
-=======
 
     public function role()
     {
         return $this->belongsTo(Role::class);
     }
+
     public function gudangs()
     {
         return $this->belongsToMany(Gudang::class, 'gudang_user')
             ->withPivot('role_id')
             ->withTimestamps();
     }
->>>>>>> side
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function jadwals()
+    {
+        return $this->hasMany(Jadwal::class);
+    }
 }

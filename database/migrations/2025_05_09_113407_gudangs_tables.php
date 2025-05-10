@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_gudang');
             $table->integer('kapasitas');
+            $table->integer('terisi')->default(0);
             $table->timestamps();
         });
     }

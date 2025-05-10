@@ -26,14 +26,25 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $user->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
 
+        $user->profile()->updateOrCreate(
+            [
+                'user_id' => $user->id
+            ],
+            [
+                'nama_lengkap' => $request->input('nama_lengkap'),
+                'alamat' => $request->input('alamat'),
+                'no_telepon' => $request->input('no_telepon'),
+            ]
+        );
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
