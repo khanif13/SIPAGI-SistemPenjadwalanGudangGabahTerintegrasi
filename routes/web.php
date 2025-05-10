@@ -3,6 +3,7 @@
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StokGabahController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,7 @@ Route::get('/', function () {
 // CRUD utama
 Route::resource('jadwal', JadwalController::class);
 Route::resource('stok-gabah', StokGabahController::class);
+Route::resource('role-manage', RoleController::class);
 
 // Update status jadwal (terima, tolak, selesai)
 Route::put('/jadwal/{id}/status', [JadwalController::class, 'updateStatus'])->name('jadwal.updateStatus');

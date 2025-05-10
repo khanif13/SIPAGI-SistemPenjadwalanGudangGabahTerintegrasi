@@ -7,7 +7,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                    <li class="breadcrumb-item">Jadwal</li>
+                    <li class="breadcrumb-item"><a href="/jadwal">Jadwal</a></li>
                     <li class="breadcrumb-item active">Pengajuan Jadwal</li>
                 </ol>
             </nav>

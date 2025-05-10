@@ -31,6 +31,7 @@
                             <table class="table datatable">
                                 <thead>
                                     <tr>
+                                        <th><b>No</b></th>
                                         <th>
                                             <b>Gudang</b>
                                         </th>
@@ -42,8 +43,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($stokGabah as $stok)
+                                    @foreach ($stokGabah as $index => $stok)
                                         <tr>
+                                            <td><b>{{ $index + 1 }}</b></td>
                                             <td>{{ $stok->gudang->nama_gudang ?? 'N/A' }}</td>
                                             <td>{{ $stok->user->name }}</td>
                                             <td>{{ \Carbon\Carbon::parse($stok->tanggal_masuk)->format('d/m/Y') }}</td>

@@ -162,7 +162,16 @@
                         <i class="ri-stack-line"></i>
                         <span>Stok</span>
                     </a>
-                </li><!-- End Gudang Nav -->
+                </li><!-- End Stok Nav -->
+            @endif
+
+            @if (Gate::allows('create-stok') || Gate::allows('delete-stok') || Gate::allows('update-stok'))
+                <li>
+                    <a class="nav-link {{ request()->is('role-manage*') ? '' : 'collapsed' }}" href="/role-manage">
+                        <i class="bx bxs-user-badge"></i>
+                        <span>Role Manager</span>
+                    </a>
+                </li><!-- End Role Manager Nav -->
             @endif
 
             <li class="nav-item">

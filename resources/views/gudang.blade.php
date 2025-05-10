@@ -27,14 +27,16 @@
                             <table class="table datatable">
                                 <thead>
                                     <tr>
+                                        <th><b>No</b></th>
                                         <th><b>Nama Gudang</b></th>
                                         <th><b>Kapasitas</b></th>
                                         <th class="text-end"><b>Aksi</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($gudang as $p)
+                                    @foreach ($gudang as $index => $p)
                                         <tr>
+                                            <th scope="row"><b>{{ $index + 1 }}</b></th>
                                             <td>{{ $p->nama_gudang }}</td>
                                             <td>{{ $p->kapasitas }}</td>
                                             <td class="text-end">

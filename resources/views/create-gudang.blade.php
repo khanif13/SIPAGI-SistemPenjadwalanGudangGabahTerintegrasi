@@ -7,7 +7,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                    <li class="breadcrumb-item">Gudang</li>
+                    <li class="breadcrumb-item"><a href="/gudang">Gudang</a></li>
                     <li class="breadcrumb-item active">{{ isset($gudang) ? 'Edit Gudang' : 'Tambah Gudang' }}</li>
                 </ol>
             </nav>

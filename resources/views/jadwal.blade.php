@@ -24,6 +24,7 @@
                             <table class="table datatable">
                                 <thead>
                                     <tr>
+                                        <th><b>No</b></th>
                                         <th><b>Nama Pengirim</b></th>
                                         <th><b>Gudang</b></th>
                                         <th>Tanggal Kirim</th>
@@ -37,8 +38,9 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($jadwal as $p)
+                                    @foreach ($jadwal as $index => $p)
                                         <tr>
+                                            <th scope="row"><b>{{ $index + 1 }}</b></th>
                                             <td>{{ $p->user->name }}</td>
                                             <td>{{ $p->gudang->nama_gudang ?? 'N/A' }}</td>
                                             <td>{{ \Carbon\Carbon::parse($p->tanggal_kirim)->format('d/m/Y') }}</td>
