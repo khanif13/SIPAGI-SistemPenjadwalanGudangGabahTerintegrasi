@@ -75,8 +75,6 @@ class JadwalController extends Controller
         return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil disimpan!');
     }
 
-
-
     /**
      * Display the specified resource.
      */
@@ -129,21 +127,6 @@ class JadwalController extends Controller
 
         return redirect()->route('jadwal.index')->with('error', 'Jadwal tidak dapat ditandai selesai.');
     }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id) {}
-
 
     public function terima($id)
     {

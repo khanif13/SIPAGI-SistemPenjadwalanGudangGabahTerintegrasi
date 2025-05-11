@@ -15,7 +15,7 @@
 
         <section class="section">
             <div class="row" style="width: 100%; height: 100%;">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
 
                     <div class="card">
                         <div class="card-body">
@@ -26,7 +26,8 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Pengirim</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="{{ $user->name }}" readonly>
+                                        <input type="text" class="form-control" value="{{ ucfirst($user->name) }}"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -66,6 +67,21 @@
                                 </div>
                             </form>
                             <!-- End General Form Elements -->
+                            @if (session('success'))
+                                <div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            @if (session('error'))
+                                <div class="alert alert-danger alert-dismissible fade show mx-3 mt-3" role="alert">
+                                    {{ session('error') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

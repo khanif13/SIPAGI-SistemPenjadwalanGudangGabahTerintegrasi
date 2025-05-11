@@ -14,22 +14,24 @@ Route::get('/', function () {
 // CRUD utama
 Route::resource('jadwal', JadwalController::class);
 Route::resource('stok-gabah', StokGabahController::class);
-Route::resource('role-manage', RoleController::class);
 
 // Update status jadwal (terima, tolak, selesai)
 Route::put('/jadwal/{id}/status', [JadwalController::class, 'updateStatus'])->name('jadwal.updateStatus');
 
-// CRUD Gudang dan Stok Gabah dengan middleware
+// CRUD dengan middleware
 Route::resource('gudang', GudangController::class)
-    ->middleware(['auth', 'can:create-gudang', 'can:update-gudang', 'can:delete-gudang']);
+    ->middleware(['auth', 'can:CRUD-gudang']);
 
 Route::resource('stok-gabah', StokGabahController::class)
     ->middleware(['auth', 'can:create-stok', 'can:update-stok', 'can:delete-stok']);
 
+Route::resource('role-manage', RoleController::class)
+    ->middleware(['auth', 'can:CRUD-role']);
+
 // Dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 // Profile
 Route::middleware('auth')->group(function () {

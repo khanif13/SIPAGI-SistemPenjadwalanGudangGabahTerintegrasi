@@ -36,26 +36,32 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->role->name ?? '-' }}</td>
                                     <td>
-                                        <form action="{{ route('role-manage.update', $user->id) }}" method="POST"
-                                            class="d-flex">
+                                        <form action="{{ route('role-manage.update', $user->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
-                                            <select name="role" class="form-control form-control-sm me-2">
-                                                <option value="admin" {{ $user->role->name == 'admin' ? 'selected' : '' }}>
-                                                    Admin</option>
-                                                <option value="manager_gudang"
-                                                    {{ $user->role->name == 'manager_gudang' ? 'selected' : '' }}>Manager
-                                                    Gudang
-                                                </option>
-                                                <option value="user"
-                                                    {{ $user->role->name == 'petani' ? 'selected' : '' }}>
-                                                    Petani</option>
+                                            <select name="role_id" class="form-control form-control-sm">
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role->id }}"
+                                                        {{ $user->role_id == $role->id ? 'selected' : '' }}>
+                                                        {{ ucfirst($role->name) }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                     </td>
                                     <td>
-                                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
-                                        </form>
+                                        <div class="d-flex gap-1">
+                                            <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                            </form>
+
+                                            <form action="{{ route('role-manage.destroy', $user->id) }}" method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus akun ini?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                            </form>
+                                        </div>
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

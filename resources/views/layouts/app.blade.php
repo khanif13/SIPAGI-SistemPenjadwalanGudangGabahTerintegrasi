@@ -62,13 +62,13 @@
                         data-bs-toggle="dropdown">
                         <img src="{{ asset('niceadmin') }}/assets/img/profile-img.jpg" alt="Profile"
                             class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ ucfirst(Auth::user()->name) }}</span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>{{ Auth::user()->name }}</h6>
-                            <span>{{ Auth::user()->role->name }}</span>
+                            <h6>{{ ucfirst(Auth::user()->name) }}</h6>
+                            <span>{{ ucfirst(Auth::user()->role->name) }}</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -165,7 +165,7 @@
                 </li><!-- End Stok Nav -->
             @endif
 
-            @if (Gate::allows('create-stok') || Gate::allows('delete-stok') || Gate::allows('update-stok'))
+            @if (Gate::allows('CRUD-role'))
                 <li>
                     <a class="nav-link {{ request()->is('role-manage*') ? '' : 'collapsed' }}" href="/role-manage">
                         <i class="bx bxs-user-badge"></i>

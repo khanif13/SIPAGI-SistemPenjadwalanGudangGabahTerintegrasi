@@ -14,7 +14,8 @@ class RoleController extends Controller
     public function index()
     {
         $user = User::with('role')->get();
-        return view('role-manage', compact('user'));
+        $roles = Role::all();
+        return view('role-manage', compact('user', 'roles'));
     }
 
 
@@ -74,6 +75,9 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('role-manage.index')->with('success', 'Akun berhasil dihapus.');
     }
 }

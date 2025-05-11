@@ -18,7 +18,9 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h5 class="card-title mb-0">Data Jadwal</h5>
-                                <a href="{{ route('jadwal.create') }}" class="btn btn-primary mt-3">Tambah Jadwal</a>
+                                @if (Gate::allows('create-jadwal'))
+                                    <a href="{{ route('jadwal.create') }}" class="btn btn-primary mt-3">Tambah Jadwal</a>
+                                @endif
                             </div>
 
                             <table class="table datatable">
@@ -41,14 +43,14 @@
                                     @foreach ($jadwal as $index => $p)
                                         <tr>
                                             <th scope="row"><b>{{ $index + 1 }}</b></th>
-                                            <td>{{ $p->user->name }}</td>
+                                            <td>{{ ucfirst($p->user->name) }}</td>
                                             <td>{{ $p->gudang->nama_gudang ?? 'N/A' }}</td>
                                             <td>{{ \Carbon\Carbon::parse($p->tanggal_kirim)->format('d/m/Y') }}</td>
                                             <td>{{ $p->berat_gabah }} Kg</td>
                                             <td>{{ $p->kadar_air }}%</td>
                                             <td>{{ ucfirst($p->status) }}</td>
 
-                                            @if (Auth::user()->role_id == '1')
+                                            @if (Gate::allows('update-stok'))
                                                 <td class="text-end">
                                                     @if ($p->status == 'diajukan')
                                                         <form action="{{ route('jadwal.updateStatus', $p->id) }}"
@@ -96,6 +98,19 @@
                             </table>
                         </div>
                     </div>
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show mx-3 mt-3" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                 </div>
             </div>
         </section>

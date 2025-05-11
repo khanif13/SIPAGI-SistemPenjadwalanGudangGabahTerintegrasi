@@ -21,16 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('create-gudang', function (User $user) {
+        Gate::define('CRUD-gudang', function (User $user) {
             return $user->role_id === 1 || $user->role_id === 2;
         });
 
-        Gate::define('update-gudang', function (User $user) {
-            return $user->role_id === 1 || $user->role_id === 2;
-        });
-
-        Gate::define('delete-gudang', function (User $user) {
-            return $user->role_id === 1 || $user->role_id === 2;
+        Gate::define('CRUD-role', function (User $user) {
+            return $user->role_id === 1;
         });
 
         Gate::define('create-stok', function (User $user) {
@@ -46,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('create-jadwal', function (User $user) {
-            return $user->role_id === 1 || $user->role_id === 2 || $user->role_id === 3;
+            return $user->role_id === 1 || $user->role_id === 3;
         });
 
         Gate::define('update-jadwal', function (User $user) {

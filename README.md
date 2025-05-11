@@ -18,15 +18,14 @@
 | ----------- | ----------- |
 | Kelola User | CRUD data pengguna |
 | Kelola Role dan Hak Akses | Menentukan akses |
-| Laporan Sistem | Export data jadwal, pengguna dsb |
 
 ### 2. Manager Gudang
 **Fokus:** Operasional gudang
 | Fitur | Deskripsi |
 | ----------- | ----------- |
 | Lihat Jadwal | Lihat jadwal pengiriman |
-| Konfirmasi Jadwal | Setujui/tolak/proses jadwal petani |
-| Update Jadwal | Tandai sebagai *selesai*, *proses*, dsb |
+| Konfirmasi Jadwal | *Setujui*/*tolak* jadwal petani |
+| Update Jadwal | Tandai sebagai *selesai* |
 | Kelola stok | Tambah/edit jumlah stok |
 | Laporan Gudang | Stok harian, riwayat masuk/keluar |
 
@@ -52,7 +51,7 @@
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
-### 1. Tabel ```roles```
+### 12. Tabel ```roles```
 | Field | Tipe Data | Keterangan |
 | ----------- | ----------- | ----------- |
 | id | INT(PK) | Primary Key |
