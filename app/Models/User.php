@@ -53,6 +53,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+
     public function gudangs()
     {
         return $this->belongsToMany(Gudang::class, 'gudang_user')
@@ -68,5 +69,10 @@ class User extends Authenticatable
     public function jadwals()
     {
         return $this->hasMany(Jadwal::class);
+    }
+
+    public function hasRole($roleName)
+    {
+        return $this->role && $this->role->name === $roleName;
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('tanggal_kirim');
             $table->float('berat_gabah');
             $table->float('kadar_air');
-            $table->enum('status', ['diajukan', 'diterima', 'ditolak', 'proses', 'selesai'])->default('diajukan');
+            $table->enum('status', ['diajukan', 'diterima', 'ditolak', 'selesai'])->default('diajukan');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

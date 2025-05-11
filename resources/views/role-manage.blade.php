@@ -32,9 +32,9 @@
                             @foreach ($user as $index => $user)
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role->name ?? '-' }}</td>
+                                    <td>{{ ucfirst($user->name) }}</td>
+                                    <td>{{ ucfirst($user->email) }}</td>
+                                    <td>{{ ucfirst($user->role->name ?? '-') }}</td>
                                     <td>
                                         <form action="{{ route('role-manage.update', $user->id) }}" method="POST">
                                             @csrf
@@ -50,18 +50,19 @@
                                     </td>
                                     <td>
                                         <div class="d-flex gap-1">
-                                            <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                            <button type="submit" class="btn btn-sm btn-primary"
+                                                style="min-width: 100px">Update</button>
                                             </form>
 
                                             <form action="{{ route('role-manage.destroy', $user->id) }}" method="POST"
                                                 onsubmit="return confirm('Yakin ingin menghapus akun ini?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                    style="min-width: 100px">Hapus</button>
                                             </form>
                                         </div>
                                     </td>
-
                                 </tr>
                             @endforeach
                         </tbody>

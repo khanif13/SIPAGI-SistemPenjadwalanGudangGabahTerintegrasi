@@ -7,6 +7,7 @@ use App\Models\Jadwal;
 use App\Models\StokGabah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class JadwalController extends Controller
 {
@@ -89,31 +90,45 @@ class JadwalController extends Controller
             'status' => 'required|in:diterima,ditolak,selesai',
         ]);
 
-        $jadwal = Jadwal::findOrFail($id);
+        DB::beginTransaction();
 
-        $jadwal->status = $request->status;
-        $jadwal->save();
+        try {
+            $jadwal = Jadwal::findOrFail($id);
+            $jadwal->status = $request->status;
+            $jadwal->save();
 
-        if (in_array($request->status, ['diterima', 'selesai'])) {
-            $stokExists = StokGabah::where([
-                'gudang_id' => $jadwal->gudang_id,
-                'user_id' => $jadwal->user_id,
-                'tanggal_masuk' => $jadwal->tanggal_kirim,
-                'berat_gabah' => $jadwal->berat_gabah,
-            ])->exists();
-
-            if (! $stokExists) {
-                StokGabah::create([
-                    'gudang_id'     => $jadwal->gudang_id,
-                    'user_id'       => $jadwal->user_id,
+            if (in_array($request->status, ['diterima', 'selesai'])) {
+                $stokExists = StokGabah::where([
+                    'gudang_id' => $jadwal->gudang_id,
+                    'user_id' => $jadwal->user_id,
                     'tanggal_masuk' => $jadwal->tanggal_kirim,
-                    'berat_gabah'   => $jadwal->berat_gabah,
-                    'kadar_air'     => $jadwal->kadar_air,
-                ]);
-            }
-        }
+                    'berat_gabah' => $jadwal->berat_gabah,
+                ])->exists();
 
-        return redirect()->route('jadwal.index')->with('success', 'Status pengajuan diperbarui.');
+                if (!$stokExists) {
+                    StokGabah::create([
+                        'gudang_id'     => $jadwal->gudang_id,
+                        'user_id'       => $jadwal->user_id,
+                        'tanggal_masuk' => $jadwal->tanggal_kirim,
+                        'berat_gabah'   => $jadwal->berat_gabah,
+                        'kadar_air'     => $jadwal->kadar_air,
+                    ]);
+                }
+            } elseif ($request->status === 'ditolak') {
+                StokGabah::where([
+                    'gudang_id' => $jadwal->gudang_id,
+                    'user_id' => $jadwal->user_id,
+                    'tanggal_masuk' => $jadwal->tanggal_kirim,
+                    'berat_gabah' => $jadwal->berat_gabah,
+                ])->delete();
+            }
+
+            DB::commit();
+            return redirect()->route('jadwal.index')->with('success', 'Status pengajuan diperbarui.');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('jadwal.index')->with('error', 'Terjadi kesalahan saat memperbarui status.');
+        }
     }
 
 

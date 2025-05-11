@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\StokGabah;
+use App\Models\Gudang;
 use Illuminate\Http\Request;
 
 use function Pest\Laravel\delete;
@@ -29,22 +30,18 @@ class StokGabahController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'gudang_id' => 'required|exists:gudangs,id',
-            'tanggal_masuk' => 'required|date',
-            'berat_gabah' => 'required|numeric',
-            'kadar_air' => 'required|numeric',
-        ]);
+        $stok = new StokGabah();
+        $stok->gudang_id = $request->gudang_id;
+        $stok->berat_gabah = $request->berat_gabah;
+        // simpan data stok
+        $stok->save();
 
-        StokGabah::create([
-            'gudang_id' => $request->gudang_id,
-            'user_id' => auth()->id(),
-            'tanggal_masuk' => $request->tanggal_masuk,
-            'berat_gabah' => $request->berat_gabah,
-            'kadar_air' => $request->kadar_air,
-        ]);
+        // update isi gudang
+        $gudang = Gudang::find($request->gudang_id);
+        $gudang->terisi += $stok->berat_gabah;
+        $gudang->save();
 
-        return redirect()->back()->with('success', 'Stok gabah berhasil ditambahkan!');
+        return redirect()->route('stok-gabah.index')->with('success', 'Stok berhasil ditambahkan.');
     }
 
     /**
@@ -63,17 +60,38 @@ class StokGabahController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $stok = StokGabah::findOrFail($id);
+        $gudang = $stok->gudang;
+
+        // Kurangi berat lama
+        $gudang->terisi -= $stok->berat_gabah;
+
+        // Update stok
+        $stok->berat_gabah = $request->berat_gabah;
+        $stok->save();
+
+        // Tambah berat baru
+        $gudang->terisi += $stok->berat_gabah;
+        $gudang->save();
+
+        return redirect()->route('stok-gabah.index')->with('success', 'Stok berhasil diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StokGabah $stokGabah)
+    public function destroy($id)
     {
-        $stokGabah->delete();
-        return redirect()->route('stok-gabah.index')->with('success', 'Data berhasil dihapus.');
+        $stok = StokGabah::findOrFail($id);
+        $gudang = $stok->gudang;
+
+        $gudang->terisi -= $stok->berat_gabah;
+        $gudang->save();
+
+        $stok->delete();
+
+        return redirect()->route('stok-gabah.index')->with('success', 'Stok berhasil dihapus.');
     }
 }

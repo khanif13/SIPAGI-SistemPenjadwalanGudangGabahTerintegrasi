@@ -50,7 +50,8 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
+                                                        onclick="return confirm('Yakin ingin menghapus?')"
+                                                        style="min-width: 100px">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

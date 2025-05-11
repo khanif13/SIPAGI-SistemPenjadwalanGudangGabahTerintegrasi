@@ -30,7 +30,9 @@
                                         <th><b>No</b></th>
                                         <th><b>Nama Gudang</b></th>
                                         <th><b>Kapasitas</b></th>
-                                        <th class="text-end"><b>Aksi</b></th>
+                                        <th><b>Jumlah Jadwal</b></th>
+                                        <th><b>Total Gabah Masuk</b></th>
+                                        <th><b>Aksi</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,19 +41,31 @@
                                             <th scope="row"><b>{{ $index + 1 }}</b></th>
                                             <td>{{ $p->nama_gudang }}</td>
                                             <td>{{ $p->kapasitas }}</td>
+                                            <td>{{ $p->jadwals_count }}</td>
+                                            <td>{{ $p->isi_gabah }} Kg</td>
                                             <td class="text-end">
-                                                <a href="{{ route('gudang.edit', $p->id) }}" class="btn btn-primary btn-sm">
-                                                    Edit
-                                                </a>
-                                                <form action="{{ route('gudang.destroy', $p->id) }}" method="POST"
-                                                    style="display: inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Yakin ingin menghapus gudang ini?')">
-                                                        Delete
-                                                    </button>
-                                                </form>
+                                                @if (Gate::allows('assign-manager'))
+                                                    <a href="{{ route('gudang.assign.form', $p->id) }}"
+                                                        class="btn btn-sm btn-warning" style="min-width: 100px">Manager</a>
+                                                @endif
+                                                @if (Gate::allows('update-gudang'))
+                                                    <a href="{{ route('gudang.edit', $p->id) }}"
+                                                        class="btn btn-primary btn-sm" style="min-width: 100px">
+                                                        Edit
+                                                    </a>
+                                                @endif
+                                                @if (Gate::allows('delete-gudang'))
+                                                    <form action="{{ route('gudang.destroy', $p->id) }}" method="POST"
+                                                        style="display: inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                            style="min-width: 100px"
+                                                            onclick="return confirm('Yakin ingin menghapus gudang ini?')">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

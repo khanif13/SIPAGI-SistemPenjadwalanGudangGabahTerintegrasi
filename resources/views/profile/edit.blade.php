@@ -54,12 +54,6 @@
                                 class="rounded-circle">
                             <h2>{{ ucfirst(Auth::user()->name) }}</h2>
                             <h3>{{ ucfirst(Auth::user()->role->name) }}</h3>
-                            <div class="social-links mt-2">
-                                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                            </div>
                         </div>
                     </div>
 
@@ -123,90 +117,11 @@
                                 </div>
 
                                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
-                                    <!-- Profile Edit Form -->
-                                    <form method="POST" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-                                        @csrf
-                                        @method('PATCH')
-
-                                        <div class="row mb-3">
-                                            <label for="nama_lengkap" class="col-md-4 col-lg-3 col-form-label">Full
-                                                Name</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="nama_lengkap" type="text" class="form-control"
-                                                    id="nama_lengkap"
-                                                    value="{{ old('nama_lengkap', auth()->user()->profile->nama_lengkap ?? '') }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="alamat" class="col-md-4 col-lg-3 col-form-label">Alamat</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input type="text" name="alamat" class="form-control" id="alamat"
-                                                    value="{{ old('alamat', auth()->user()->profile->alamat ?? '') }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="no_telepon" class="col-md-4 col-lg-3 col-form-label">No
-                                                Telepon</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input type="text" name="no_telepon" class="form-control" id="no_telepon"
-                                                    value="{{ old('no_telepon', auth()->user()->profile->no_telepon ?? '') }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="email" type="email" class="form-control" id="Email"
-                                                    value="{{ Auth::user()->email }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                                        </div>
-                                    </form><!-- End Profile Edit Form -->
-
+                                    @include('profile.partials.update-profile-information-form')
                                 </div>
 
                                 <div class="tab-pane fade pt-3" id="profile-change-password">
-                                    <!-- Change Password Form -->
-                                    <form>
-
-                                        <div class="row mb-3">
-                                            <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current
-                                                Password</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="password" type="password" class="form-control"
-                                                    id="currentPassword">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New
-                                                Password</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="newpassword" type="password" class="form-control"
-                                                    id="newPassword">
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter
-                                                New Password</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="renewpassword" type="password" class="form-control"
-                                                    id="renewPassword">
-                                            </div>
-                                        </div>
-
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary">Change Password</button>
-                                        </div>
-                                    </form><!-- End Change Password Form -->
-
+                                    @include('profile.partials.update-password-form')
                                 </div>
 
                             </div><!-- End Bordered Tabs -->

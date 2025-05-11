@@ -25,4 +25,9 @@ class Gudang extends Model
             ->withPivot('role_id')
             ->withTimestamps();
     }
+
+    public function getIsiGabahAttribute()
+    {
+        return $this->stokGabahs()->sum('berat_gabah');
+    }
 }

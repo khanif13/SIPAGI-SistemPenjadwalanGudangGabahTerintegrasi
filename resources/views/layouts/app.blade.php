@@ -156,7 +156,7 @@
                 </li><!-- End Gudang Nav -->
             @endif
 
-            @if (Gate::allows('create-stok') || Gate::allows('delete-stok') || Gate::allows('update-stok'))
+            @if (Gate::allows('CRUD-stok'))
                 <li>
                     <a class="nav-link {{ request()->is('stok-gabah*') ? '' : 'collapsed' }}" href="/stok-gabah">
                         <i class="ri-stack-line"></i>
@@ -175,7 +175,7 @@
             @endif
 
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('faq*') ? '' : 'collapsed' }}" href="pages-faq.html">
+                <a class="nav-link {{ request()->is('faq*') ? '' : 'collapsed' }}" href="/faq">
                     <i class="bi bi-question-circle"></i>
                     <span>F.A.Q</span>
                 </a>

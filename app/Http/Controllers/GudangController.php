@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gudang;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +14,23 @@ class GudangController extends Controller
      */
     public function index()
     {
-        $gudang = Gudang::all();
+        $user = Auth::user()->load('role');
+        if ($user->hasRole('admin')) {
+            $gudang = Gudang::withCount('jadwals')
+                ->withSum('stokGabahs', 'berat_gabah')
+                ->get();
+        } else if ($user->hasRole('manager')) {
+            $gudang = $user->gudangs()
+                ->withCount('jadwals')
+                ->withSum('stokGabahs', 'berat_gabah')
+                ->get();
+        } else {
+            $gudang = collect();
+        }
+
         return view('gudang', compact('gudang'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -96,5 +111,34 @@ class GudangController extends Controller
         $gudang->delete();
 
         return redirect()->route('gudang.index')->with('success', 'Gudang berhasil dihapus!');
+    }
+
+    public function assignManagerForm($id)
+    {
+        $gudang = Gudang::findOrFail($id);
+
+        // Ambil user dengan role MANAGER (misal role_id = 2)
+        $managers = User::whereHas('role', function ($q) {
+            $q->where('name', 'manager'); // atau pakai role_id == 2 sesuai implementasi kamu
+        })->get();
+
+        return view('gudang-manager', compact('gudang', 'managers'));
+    }
+
+    public function assignManager(Request $request, $id)
+    {
+        $request->validate([
+            'manager_id' => 'required|exists:users,id',
+        ]);
+
+        $gudang = Gudang::findOrFail($id);
+        $managerId = $request->manager_id;
+
+        // Role_id 2 misal = MANAGER
+        $gudang->users()->syncWithoutDetaching([
+            $managerId => ['role_id' => 2]
+        ]);
+
+        return redirect()->route('gudang.index')->with('success', 'Manager berhasil ditambahkan!');
     }
 }
