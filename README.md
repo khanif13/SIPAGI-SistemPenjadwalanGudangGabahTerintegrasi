@@ -64,6 +64,7 @@
 | id | INT(PK) | Primary Key |
 | nama_gudang | VARCHAR(100) | Nama Gudang |
 | kapasitas | INT | Maksimal kapasitas gudang |
+| terisi | INT | Isi gudang |
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
@@ -76,7 +77,7 @@
 | tanggal_kirim | DATE | Tanggal kirim gabah |
 | berat_gabah | FLOAT | Berat gabah dalam kg |
 | kadar_air | FLOAT | Persentase kadar air padi |
-| status | ENUM | 'diajukan', 'diproses', 'selesai', 'ditolak' |
+| status | ENUM | 'diajukan', 'diterima', 'selesai', 'ditolak' |
 | created_at | TIMESTAMP | Waktu dibuat |
 | updated_at | TIMESTAMP | Waktu diupdate |
 
